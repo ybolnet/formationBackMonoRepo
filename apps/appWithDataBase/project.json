@@ -1,0 +1,26 @@
+{
+  "name": "appWithDataBase",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/appWithDataBase/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "appWithDataBase:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "appWithDataBase:build:development"
+        },
+        "production": {
+          "buildTarget": "appWithDataBase:build:production"
+        }
+      }
+    }
+  }
+}
