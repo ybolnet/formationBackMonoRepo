@@ -1,0 +1,9 @@
+{
+  "name": "generalZod",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/generalZod/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project generalZod --web",
+  "targets": {}
+}

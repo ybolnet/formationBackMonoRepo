@@ -31,6 +31,9 @@
     "resolveJsonModule": true,
     "allowJs": false,
     "incremental": true,
+    "paths": {
+      "@workspace/generalZod": ["libs/generalZod/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
