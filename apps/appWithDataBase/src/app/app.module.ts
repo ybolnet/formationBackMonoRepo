@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { TestEntity } from '../entities/TestEntity';
+import { TaskDao } from '../task/infra/dao/task.dao';
+import { TaskModule } from '../task/task.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TestEntityService } from './testentity.service';
@@ -17,10 +19,11 @@ import { TestEntityService } from './testentity.service';
       username: 'myuser',
       password: process.env['PASSWORD'],
       database: 'mydatabase',
-      entities: [TestEntity],
+      entities: [TestEntity, TaskDao],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([TestEntity]),
+    TaskModule,
   ],
   controllers: [AppController],
   providers: [AppService, TestEntityService],
