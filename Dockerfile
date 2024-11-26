@@ -1,5 +1,5 @@
 # Use Node.js base image
-FROM node:18-alpine AS base
+FROM node:22.11-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 # Set the working directory
@@ -17,17 +17,6 @@ COPY . .
 
 # Build the monorepo (this builds all apps and libs in the monorepo)
 RUN nx build appWithDataBase
-
-# Target a specific application to run
-FROM node:18-alpine AS runner
-
-# Set the working directory for the runner stage
-WORKDIR /app
-
-# Copy the built files from the previous stage
-COPY --from=base /app/dist ./dist
-COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/package.json ./
 
 # Expose port (assuming our app uses 3000; adjust if needed)
 EXPOSE 3000

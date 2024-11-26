@@ -32,6 +32,7 @@
     "allowJs": false,
     "incremental": true,
     "paths": {
+      "@workspace/Zod2": ["libs/Zod2/src/index.ts"],
       "@workspace/generalZod": ["libs/generalZod/src/index.ts"]
     }
   },

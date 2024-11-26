@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   app-with-database:
+    container_name: 'appWithDatabaseContainer'
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -9,13 +10,14 @@ services:
       - DB_HOST=db
       - DB_PORT=5432
       - DB_USERNAME=myuser
-      - DB_PASSWORD=mypassword
+      - PASSWORD=mypassword
       - DB_NAME=mydatabase
     ports:
       - '3000:3000'
     depends_on:
       - db
   db:
+    container_name: 'databaseContainer'
     image: postgres:15
     environment:
       POSTGRES_USER: myuser

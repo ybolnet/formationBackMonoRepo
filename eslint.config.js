@@ -1,9 +1,16 @@
+const sonarjs = require('eslint-plugin-sonarjs');
 const nx = require('@nx/eslint-plugin');
 
 module.exports = [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
+  sonarjs.configs.recommended,
+  /*{
+    plugins: {
+      sonarjs,
+    },
+  },*/
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {

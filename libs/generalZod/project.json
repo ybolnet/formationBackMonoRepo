@@ -4,6 +4,9 @@
   "sourceRoot": "libs/generalZod/src",
   "projectType": "library",
   "tags": [],
+  "scripts": {
+    "build": "nest build"
+  },
   "// targets": "to see all targets run: nx show project generalZod --web",
   "targets": {}
 }

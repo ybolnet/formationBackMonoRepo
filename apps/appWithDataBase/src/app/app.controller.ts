@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { Exportable } from '@workspace/generalZod';
 
 import { AppService } from './app.service';
 import { TestEntityService } from './testentity.service';
@@ -17,6 +18,8 @@ export class AppController {
 
   @Get('allEntities')
   async testOneEntity() {
+    const imported: Exportable = new Exportable('bob');
+    console.log(`${imported.content}`);
     await this.testEntityService.createTestEntity('test');
     return this.testEntityService.findAll();
   }
