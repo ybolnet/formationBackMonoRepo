@@ -5,3 +5,6 @@ export interface Task {
 
   description: string;
 }
+export type CreatedTask = Omit<Task, 'id'>;
+export type PostedTask = Omit<Task, 'id'>;
+export type PostedEditedTask = Partial<PostedTask>;

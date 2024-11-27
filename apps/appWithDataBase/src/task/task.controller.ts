@@ -1,18 +1,33 @@
-import { Controller, Get, Inject, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
-import { TaskPort, TaskPortToken } from './core/ports/task.port';
+import { TaskService } from './core/services/task.service';
+import { PostedEditedTaskDto, PostedTaskDto } from './infra/dto/task.dto';
 
-@Controller('task')
+@Controller('todos')
 export class TaskController {
-  constructor(@Inject(TaskPortToken) private taskPort: TaskPort) {}
+  constructor(private service: TaskService) {}
 
-  @Get('todos/:id')
+  @Get(':id')
   async findTask(@Param('id') id: number) {
-    return await this.taskPort.findTask(id);
+    return await this.service.findTask(id);
   }
 
-  @Get('todos')
+  @Get()
   async findAllTasks() {
-    return await this.taskPort.findAll();
+    return await this.service.findAllTasks();
+  }
+
+  @Post()
+  async createTask(@Body() taskToCreate: PostedTaskDto) {
+    console.log(`task body ${taskToCreate} `);
+    return this.service.createTask(taskToCreate);
+  }
+
+  @Patch(':id')
+  async editTast(
+    @Body() taskToEdit: PostedEditedTaskDto,
+    @Param('id') id: number
+  ) {
+    return this.service.editTask(id, taskToEdit);
   }
 }
