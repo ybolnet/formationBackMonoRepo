@@ -17,7 +17,7 @@ async function createModuleWithMockedTaskPort(taskPort: TaskPort) {
   }).compile();
 }
 
-describe('TaskService', () => {
+describe('FindTaskUseCase', () => {
   let usecase: FindTaskUseCase;
 
   beforeEach(async () => {
