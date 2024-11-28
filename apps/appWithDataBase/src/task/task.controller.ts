@@ -1,15 +1,19 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
+import { FindTaskUseCase } from './core/services/findtask.usecase';
 import { TaskService } from './core/services/task.service';
 import { PostedEditedTaskDto, PostedTaskDto } from './infra/dto/task.dto';
 
 @Controller('todos')
 export class TaskController {
-  constructor(private service: TaskService) {}
+  constructor(
+    private service: TaskService,
+    private findTaskUseCase: FindTaskUseCase
+  ) {}
 
   @Get(':id')
   async findTask(@Param('id') id: number) {
-    return await this.service.findTask(id);
+    return await this.findTaskUseCase.execute(id);
   }
 
   @Get()
