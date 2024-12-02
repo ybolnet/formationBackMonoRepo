@@ -5,11 +5,11 @@ import { TaskPort, TaskPortToken } from '../ports/task.port';
 
 @Injectable()
 export class EditTaskUseCase {
-  constructor(@Inject(TaskPortToken) private taskPort: TaskPort) {}
+  constructor(@Inject(TaskPortToken) private readonly taskPort: TaskPort) {}
 
   async execute(id: number, edited: PostedEditedTask) {
-    var found = await this.taskPort.findTask(id);
-    if (found == null) {
+    const found = await this.taskPort.findTask(id);
+    if (found === null) {
       throw new NotFoundException();
     }
     this.taskPort.editTask(id, edited);

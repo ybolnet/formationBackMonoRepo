@@ -1,18 +1,18 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
-import { CreateTaskUseCase } from './core/services/createtask.usecase';
-import { EditTaskUseCase } from './core/services/edittask.usecase';
-import { FindAllTasksUseCase } from './core/services/findalltasks.usecase';
-import { FindTaskUseCase } from './core/services/findtask.usecase';
+import { CreateTaskUseCase } from './core/services/create-task.usecase';
+import { EditTaskUseCase } from './core/services/edit-task.usecase';
+import { FindAllTasksUseCase } from './core/services/find-all-tasks.usecase';
+import { FindTaskUseCase } from './core/services/find-task.usecase';
 import { PostedEditedTaskDto, PostedTaskDto } from './infra/dto/task.dto';
 
 @Controller('todos')
 export class TaskController {
   constructor(
-    private findAllTaskUseCase: FindAllTasksUseCase,
-    private findTaskUseCase: FindTaskUseCase,
-    private createTaskUseCase: CreateTaskUseCase,
-    private editTaskUseCase: EditTaskUseCase
+    private readonly findAllTaskUseCase: FindAllTasksUseCase,
+    private readonly findTaskUseCase: FindTaskUseCase,
+    private readonly createTaskUseCase: CreateTaskUseCase,
+    private readonly editTaskUseCase: EditTaskUseCase
   ) {}
 
   @Get(':id')
@@ -27,7 +27,7 @@ export class TaskController {
 
   @Post()
   async createTask(@Body() taskToCreate: PostedTaskDto) {
-    console.log(`task body ${taskToCreate} `);
+    console.log(`task body ${JSON.stringify(taskToCreate)} `);
     return this.createTaskUseCase.execute(taskToCreate);
   }
 

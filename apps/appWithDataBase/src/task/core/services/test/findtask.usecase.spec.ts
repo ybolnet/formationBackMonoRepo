@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { Task } from '../../entities/task.entity';
 import { TaskPort, TaskPortToken } from '../../ports/task.port';
-import { FindTaskUseCase } from '../findtask.usecase';
+import { FindTaskUseCase } from '../find-task.usecase';
 
 async function createModuleWithMockedTaskPort(taskPort: TaskPort) {
   return Test.createTestingModule({
@@ -30,9 +30,9 @@ describe('FindTaskUseCase', () => {
 
   it('useCase fails when not finding task', async () => {
     let error: HttpException | undefined;
-    let module = await createModuleWithMockedTaskPort({
-      findTask(id: number): Promise<Task | null> {
-        console.log(`mocked call findTask(${id})`);
+    const module = await createModuleWithMockedTaskPort({
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      findTask(_id: number): Promise<Task | null> {
         return Promise.resolve(null);
       },
     } as TaskPort);
@@ -40,15 +40,17 @@ describe('FindTaskUseCase', () => {
     usecase = module.get<FindTaskUseCase>(FindTaskUseCase);
     try {
       await usecase.execute(1);
-    } catch (e: any) {
-      error = e;
+    } catch (e: unknown) {
+      if (e instanceof HttpException) {
+        error = e;
+      }
     }
     expect(error).toBeInstanceOf(NotFoundException);
   });
 
   it('useCase calls correct finding method', async () => {
-    let idTask: number = 0;
-    let module = await createModuleWithMockedTaskPort({
+    let idTask = 0;
+    const module = await createModuleWithMockedTaskPort({
       findTask(id: number): Promise<Task | null> {
         idTask = id;
         return Promise.resolve(null);
@@ -58,8 +60,8 @@ describe('FindTaskUseCase', () => {
     usecase = module.get<FindTaskUseCase>(FindTaskUseCase);
     try {
       await usecase.execute(1);
-    } catch (e: any) {}
-
-    expect(idTask).toBe(1);
+    } catch {
+      expect(idTask).toBe(1);
+    }
   });
 });

@@ -11,14 +11,14 @@ import { TaskDao } from '../dao/task.dao';
 export class TaskRepository implements TaskPort {
   constructor(
     @InjectRepository(TaskDao)
-    private repo: Repository<TaskDao>
+    private readonly repo: Repository<TaskDao>
   ) {}
 
   save(task: CreatedTask): Promise<Task> {
     console.log(
       `delegated save(${JSON.stringify(task)} ) to typeORM aware object`
     );
-    var newTask = this.repo.create(task);
+    const newTask = this.repo.create(task);
     console.log(`task to be saved is ${JSON.stringify(newTask)} `);
     return this.repo.save(newTask);
   }
