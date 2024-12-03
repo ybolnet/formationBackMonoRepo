@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
-import { CreateTaskUseCase } from './core/services/create-task.usecase';
-import { EditTaskUseCase } from './core/services/edit-task.usecase';
-import { FindAllTasksUseCase } from './core/services/find-all-tasks.usecase';
-import { FindTaskUseCase } from './core/services/find-task.usecase';
-import { PostedEditedTaskDto, PostedTaskDto } from './infra/dto/task.dto';
+import { CreateTaskUseCase } from '../core/usecases/create-task.usecase';
+import { EditTaskUseCase } from '../core/usecases/edit-task.usecase';
+import { FindAllTasksUseCase } from '../core/usecases/find-all-tasks.usecase';
+import { FindTaskUseCase } from '../core/usecases/find-task.usecase';
+import { PostedEditedTaskDto, PostedTaskDto } from './dto/task.dto';
 
 @Controller('todos')
 export class TaskController {

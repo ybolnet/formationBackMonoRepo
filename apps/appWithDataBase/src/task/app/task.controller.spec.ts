@@ -5,13 +5,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgreSqlContainer } from '@testcontainers/postgresql';
 
-import { TaskPortToken } from './core/ports/task.port';
-import { CreateTaskUseCase } from './core/services/create-task.usecase';
-import { EditTaskUseCase } from './core/services/edit-task.usecase';
-import { FindAllTasksUseCase } from './core/services/find-all-tasks.usecase';
-import { FindTaskUseCase } from './core/services/find-task.usecase';
-import { TaskDao } from './infra/dao/task.dao';
-import { TaskRepository } from './infra/ports/task.repository';
+import { TaskPortToken } from '../core/ports/task.port';
+import { CreateTaskUseCase } from '../core/usecases/create-task.usecase';
+import { EditTaskUseCase } from '../core/usecases/edit-task.usecase';
+import { FindAllTasksUseCase } from '../core/usecases/find-all-tasks.usecase';
+import { FindTaskUseCase } from '../core/usecases/find-task.usecase';
+import { TaskDao } from '../infra/dao/task.dao';
+import { TaskRepository } from '../infra/repository/task.repository';
 import { TaskController } from './task.controller';
 
 describe('TaskController', () => {
